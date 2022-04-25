@@ -110,12 +110,14 @@ class Swimming(Training):
         colories = (self.get_mean_speed() + 1.1) * 2 * self.weight
         return colories
 
+
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     type_dict = {'SWM': Swimming,
                  'RUN': Running,
                  'WLK': SportsWalking}
     return type_dict[workout_type](*data)
+
 
 def main(training: Training) -> None:
     """Главная функция."""
