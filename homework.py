@@ -65,7 +65,8 @@ class Running(Training):
     coeff_calorie_2 = 20
 
     def get_spent_calories(self) -> float:
-        colories = (self.coeff_calorie_1 * self.get_mean_speed()) - self.coeff_calorie_2 / self.M_IN_KM * self.duration
+        colories = (self.coeff_calorie_1 * self.get_mean_speed()) \
+                   - self.coeff_calorie_2 / self.M_IN_KM * self.duration
         return colories
 
 
@@ -81,7 +82,8 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        colories = (0.035 * self.weight + (self.get_mean_speed() ** 2 // self.height)
+        colories = (0.035 * self.weight + (self.get_mean_speed() ** 2
+                                           // self.height)
                     * 0.029 * self.weight) * self.duration
         return colories
 
@@ -108,14 +110,12 @@ class Swimming(Training):
         colories = (self.get_mean_speed() + 1.1) * 2 * self.weight
         return colories
 
-
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     type_dict = {'SWM': Swimming,
                  'RUN': Running,
                  'WLK': SportsWalking}
     return type_dict[workout_type](*data)
-
 
 def main(training: Training) -> None:
     """Главная функция."""
