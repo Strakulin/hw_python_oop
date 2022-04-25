@@ -5,16 +5,16 @@ class InfoMessage:
                  duration: float,
                  distance: float,
                  speed: float,
-                 colories: float
+                 calories: float
                  ) -> None:
         self.training_type = training_type
         self.duration = duration
         self.distance = distance
         self.speed = speed
-        self.calories = colories
+        self.calories = calories
 
     def get_message(self):
-        return (f'Тип тренировки: {self.training_type}; '
+        return str(f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration} ч.;'
                 f'Дистанция: {self.distance:.3f} км;'
                 f'Ср. скорость: {self.speed:.3f} км/ч;'
@@ -102,14 +102,14 @@ class Swimming(Training):
         self.length_pool = length_pool
         self.count_pool = count_pool
 
-    def get_mean_speed(self) -> float:
+    def get_mean(self) -> float:
         speed = self.length_pool * self.count_pool \
             / self.M_IN_KM / (self.duration * 60)
         return speed
 
     def get_spent_calories(self) -> float:
-        colories = (self.get_mean_speed() + 1.1) * 2 * self.weight
-        return colories
+        calories = (self.get_mean_speed() + 1.1) * 2 * self.weight
+        return calories
 
 
 def read_package(workout_type: str, data: list) -> Training:
