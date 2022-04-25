@@ -102,7 +102,7 @@ class Swimming(Training):
         self.length_pool = length_pool
         self.count_pool = count_pool
 
-    def get_mean(self) -> float:
+    def get_mean_speed(self) -> float:
         speed = self.length_pool * self.count_pool \
             / self.M_IN_KM / (self.duration * 60)
         return speed
