@@ -13,7 +13,7 @@ class InfoMessage:
         self.speed = speed
         self.calories = calories
 
-    def get_message(self):
+    def get_message(self) ->str:
         return str(f'Тип тренировки: {self.training_type}; '
                    f'Длительность: {self.duration} ч.;'
                    f'Дистанция: {self.distance:.3f} км;'
