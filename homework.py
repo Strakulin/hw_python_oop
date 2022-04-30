@@ -1,3 +1,4 @@
+
 from dataclasses import asdict, dataclass
 from typing import ClassVar, List, Dict, Type
 
@@ -31,6 +32,7 @@ class Training:
     LEN_STEP = 0.65
     M_IN_KM = 1000
     MIN_H = 60
+
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
         return self.action * self.LEN_STEP / self.M_IN_KM
@@ -60,8 +62,8 @@ class Running(Training):
     COEFF_CALORIE_2 = 20
 
     def get_spent_calories(self) -> float:
-        return (self.COEFF_CALORIE_1 * self.get_mean_speed()
-        - self.COEFF_CALORIE_2) * self.weight / self.M_IN_KM * (self.duration * self.MIN_H)
+        return (self.COEFF_CALORIE_1 * self.get_mean_speed() -
+                self.COEFF_CALORIE_2) * self.weight / self.M_IN_KM * (self.duration * self.MIN_H)
 
 
 @dataclass
@@ -73,8 +75,10 @@ class SportsWalking(Training):
     height: float
     COEFF_CALORIE_5 = 0.035
     COEFF_CALORIE_6 = 0.029
+
     def get_spent_calories(self) -> float:
-        return (self.COEFF_CALORIE_5 * self.weight + (self.get_mean_speed() ** 2 // self.height)
+        return (self.COEFF_CALORIE_5 * self.weight +
+                (self.get_mean_speed() ** 2 // self.height)
                 * self.COEFF_CALORIE_6
                 * self.weight) * (self.duration * self.MIN_H)
 
@@ -100,7 +104,8 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         return (self.get_mean_speed() + self.COEFF_CALORIE_3)\
-            * self.COEFF_CALORIE_4* self.weight
+            * self.COEFF_CALORIE_4 * self.weight
+
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
@@ -113,9 +118,11 @@ def read_package(workout_type: str, data: List[int]) -> Training:
         raise KeyError(f'Ошибка ключа {workout_type}')
     return sensors[workout_type](*data)
 
+
 def main(training: Training) -> None:
     """Главная функция."""
-    print (training.show_training_info().get_message())
+    print(training.show_training_info().get_message())
+
 
 if __name__ == '__main__':
     packages = [
