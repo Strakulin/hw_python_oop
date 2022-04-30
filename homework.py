@@ -1,6 +1,7 @@
 from dataclasses import asdict, dataclass
 from typing import ClassVar, List, Dict, Type
 
+
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -60,8 +61,10 @@ class Running(Training):
     COEFF_CALORIE_2 = 20
 
     def get_spent_calories(self) -> float:
-        return (self.COEFF_CALORIE_1 * self.get_mean_speed()
-                - self.COEFF_CALORIE_2) * self.weight / self.M_IN_KM * (self.duration * self.MIN_H)
+        return ((self.COEFF_CALORIE_1 * self.get_mean_speed()
+                - self.COEFF_CALORIE_2)
+                * self.weight / self.M_IN_KM
+                * (self.duration * self.MIN_H))
 
 
 @dataclass
@@ -73,10 +76,12 @@ class SportsWalking(Training):
     height: float
     COEFF_CALORIE_5 = 0.035
     COEFF_CALORIE_6 = 0.029
+
     def get_spent_calories(self) -> float:
-        return (self.COEFF_CALORIE_5 * self.weight
+        return ((self.COEFF_CALORIE_5 * self.weight
                 + (self.get_mean_speed() ** 2 // self.height)
-                * self.COEFF_CALORIE_6 * self.weight) * (self.duration * self.MIN_H)
+                * self.COEFF_CALORIE_6 * self.weight)
+                * (self.duration * self.MIN_H))
 
 
 @dataclass
@@ -96,7 +101,10 @@ class Swimming(Training):
         return self.action * self.LEN_STEP / self.M_IN_KM
 
     def get_mean_speed(self) -> float:
-        return self.length_pool * self.count_pool / self.M_IN_KM / self.duration
+        return (self.length_pool
+                * self.count_pool
+                / self.M_IN_KM
+                / self.duration)
 
     def get_spent_calories(self) -> float:
         return (self.get_mean_speed() + self.COEFF_CALORIE_3)\
