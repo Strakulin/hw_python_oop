@@ -109,9 +109,9 @@ def read_package(workout_type: str, data: List[int]) -> Training:
         'RUN': Running,
         'WLK': SportsWalking
     }
-
+    if workout_type not in sensors:
+        raise KeyError(f'Ошибка ключа {workout_type}')
     return sensors[workout_type](*data)
-    raise KeyError("foo occurred")
 
 def main(training: Training) -> None:
     """Главная функция."""
