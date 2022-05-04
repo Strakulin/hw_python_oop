@@ -55,6 +55,7 @@ class Training:
         )
 
 
+@dataclass
 class Running(Training):
     """Тренировка: бег."""
     COEFF_CALORIE_1: ClassVar[float] = 18
